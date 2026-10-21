@@ -8,7 +8,10 @@ import numpy as np
 from typing import Dict, Any, List
 
 SUSPICIOUS_GEO = {"RU": 0.8, "KP": 0.95, "CN": 0.75, "IR": 0.85, "TOR_EXIT_NODE": 1.0}
-HIGH_RISK_KEYWORDS = ["injection", "escalation", "zero-day", "rce", "ransomware", "exfil", "shadow", "unauthorized"]
+HIGH_RISK_KEYWORDS = [
+    "injection", "escalation", "zero-day", "rce", "ransomware",
+    "exfil", "shadow", "unauthorized", "exploit", "overflow", "cve", "breach", "payload"
+]
 
 
 class FeatureExtractor:
@@ -43,12 +46,19 @@ class FeatureExtractor:
         hour_cos = math.cos(2 * math.pi * hour / 24.0)
 
         geo = event.get("geo_country", "IN")
+        src_ip = event.get("source_ip", "")
+        if src_ip.startswith("185.220.") or src_ip.startswith("45.154."):
+            geo = "TOR_EXIT_NODE"
         geo_risk = SUSPICIOUS_GEO.get(geo, 0.1)
 
         anomaly = float(event.get("anomaly_indicator", 0.1))
 
-        # Text keyword threat analysis over action + resource
-        action_text = (event.get("action", "") + " " + event.get("resource", "")).lower()
+        # Text keyword threat analysis over event_type + action + resource
+        action_text = (
+            str(event.get("event_type", "")) + " " +
+            str(event.get("action", "")) + " " +
+            str(event.get("resource", ""))
+        ).lower()
         keyword_hits = sum(1 for kw in HIGH_RISK_KEYWORDS if kw in action_text)
         keyword_threat_norm = min(keyword_hits / 3.0, 1.0)
 

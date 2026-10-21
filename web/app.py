@@ -115,6 +115,19 @@ async def generate_and_log_event(tier: Optional[str] = None):
 async def log_custom_event(payload: CustomEventRequest):
     """Processes a user-submitted custom security event."""
     import uuid, datetime
+    # Dynamic origin & anomaly calculation
+    geo = "IN"
+    if payload.source_ip.startswith("185.220.") or payload.source_ip.startswith("45.154."):
+        geo = "TOR_EXIT_NODE"
+    elif payload.failure_count > 10:
+        geo = "RU"
+    elif payload.failure_count > 5:
+        geo = "US"
+
+    anomaly = min(0.3 + (payload.failure_count * 0.035) + (0.3 if payload.sensitive_target else 0.0), 1.0)
+    if "ZERO_DAY" in payload.event_type.upper() or "RANSOMWARE" in payload.event_type.upper():
+        anomaly = 0.98
+
     custom_e = {
         "event_id": str(uuid.uuid4()),
         "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
@@ -128,8 +141,8 @@ async def log_custom_event(payload: CustomEventRequest):
         "is_admin_action": payload.is_admin_action,
         "sensitive_target": payload.sensitive_target,
         "hour_of_day": datetime.datetime.now().hour,
-        "geo_country": "US" if payload.failure_count > 5 else "IN",
-        "anomaly_indicator": min(payload.failure_count * 0.1, 1.0),
+        "geo_country": geo,
+        "anomaly_indicator": anomaly,
         "payload": payload.payload or {"custom_note": "User-submitted security event"}
     }
     result = pipeline.process_event(custom_e)
