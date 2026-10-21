@@ -3,7 +3,10 @@
 let recentEvents = [];
 
 document.addEventListener("DOMContentLoaded", () => {
+  initCyberBootSequence();
+  initQuantumLatticeCanvas();
   setupTabs();
+  setupModalBackdrops();
   fetchSystemStatus();
   loadBlockchainData();
   loadCryptoBenchmark();
@@ -11,6 +14,157 @@ document.addEventListener("DOMContentLoaded", () => {
   // Periodic polling for status updates every 6 seconds
   setInterval(fetchSystemStatus, 6000);
 });
+
+// Cyber Boot / Welcome HUD Animation
+let bootDismissed = false;
+function initCyberBootSequence() {
+  const overlay = document.getElementById("cyber-boot-overlay");
+  const consoleEl = document.getElementById("boot-console-text");
+  if (!overlay || !consoleEl) return;
+
+  const steps = [
+    { delay: 250, text: "[AUTHENTICATING] ABESIT / AKTU Consortium Trust Anchors..." },
+    { delay: 550, text: "[HARDENING] NIST FIPS 203 ML-KEM & FIPS 204 ML-DSA Post-Quantum Engines Ready" },
+    { delay: 850, text: "[CONSENSUS] Merkle Block Tree & PBFT Validator Consortium Synchronized" },
+    { delay: 1100, text: "[ONLINE] Adaptive PQC Cyber Stream Active. Entering SOC Dashboard..." }
+  ];
+
+  steps.forEach(s => {
+    setTimeout(() => {
+      if (!bootDismissed && consoleEl) {
+        consoleEl.innerText = s.text;
+      }
+    }, s.delay);
+  });
+
+  setTimeout(() => {
+    dismissBootOverlay();
+  }, 1300);
+}
+
+function dismissBootOverlay() {
+  if (bootDismissed) return;
+  bootDismissed = true;
+  const overlay = document.getElementById("cyber-boot-overlay");
+  if (overlay) {
+    overlay.classList.add("boot-hidden");
+  }
+}
+
+// Interactive Quantum Cryptographic Lattice Canvas Animation
+function initQuantumLatticeCanvas() {
+  const canvas = document.getElementById("quantum-lattice-canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener("resize", () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  const nodeCount = Math.min(Math.floor((width * height) / 28000), 55);
+  const nodes = [];
+  const colors = ["#38bdf8", "#10b981", "#818cf8", "#6ee7b7"];
+
+  for (let i = 0; i < nodeCount; i++) {
+    nodes.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.55,
+      vy: (Math.random() - 0.5) * 0.55,
+      radius: Math.random() * 2 + 1.2,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      pulse: Math.random() * Math.PI,
+    });
+  }
+
+  let mouse = { x: -1000, y: -1000 };
+  window.addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  function draw() {
+    if (document.hidden) {
+      requestAnimationFrame(draw);
+      return;
+    }
+
+    ctx.clearRect(0, 0, width, height);
+
+    // Update & draw nodes
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      n.x += n.vx;
+      n.y += n.vy;
+      n.pulse += 0.025;
+
+      if (n.x < 0 || n.x > width) n.vx *= -1;
+      if (n.y < 0 || n.y > height) n.vy *= -1;
+
+      // Mouse gentle interaction
+      const dxm = mouse.x - n.x;
+      const dym = mouse.y - n.y;
+      const distM = Math.sqrt(dxm * dxm + dym * dym);
+      if (distM < 100) {
+        n.x -= (dxm / distM) * 0.8;
+        n.y -= (dym / distM) * 0.8;
+      }
+
+      const currentRadius = n.radius + Math.sin(n.pulse) * 0.5;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, Math.max(currentRadius, 0.5), 0, Math.PI * 2);
+      ctx.fillStyle = n.color;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = n.color;
+      ctx.fill();
+
+      // Connect with nearby lattice nodes
+      for (let j = i + 1; j < nodes.length; j++) {
+        const n2 = nodes[j];
+        const dx = n.x - n2.x;
+        const dy = n.y - n2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 135) {
+          const alpha = (1 - dist / 135) * 0.28;
+          ctx.beginPath();
+          ctx.moveTo(n.x, n.y);
+          ctx.lineTo(n2.x, n2.y);
+          ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+          ctx.lineWidth = 0.85;
+          ctx.shadowBlur = 0;
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+}
+
+// Modal Backdrop & ESC key dismiss
+function setupModalBackdrops() {
+  document.querySelectorAll(".modal").forEach(modal => {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("active");
+      }
+    });
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".modal.active").forEach(m => m.classList.remove("active"));
+    }
+  });
+}
 
 // Tab Navigation
 function setupTabs() {
@@ -74,10 +228,15 @@ function renderEventsTable() {
   const tbody = document.getElementById("events-tbody");
   tbody.innerHTML = "";
 
-  recentEvents.forEach(item => {
+  recentEvents.forEach((item, index) => {
     const rec = item.record;
     const ai = item.ai_inference;
     const tr = document.createElement("tr");
+
+    // Add entry animation to the top (newest) row
+    if (index === 0 && recentEvents.length > 0) {
+      tr.className = "row-enter-anim";
+    }
 
     // Risk badge class
     const rClass = `badge-${rec.risk_level.toLowerCase()}`;

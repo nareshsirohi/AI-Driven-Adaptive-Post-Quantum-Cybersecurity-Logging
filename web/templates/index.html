@@ -10,6 +10,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Animated Background Quantum Lattice Canvas -->
+  <canvas id="quantum-lattice-canvas"></canvas>
+
+  <!-- Cyber Scanline Laser Bar (top of window) -->
+  <div class="top-laser-line"></div>
+
+  <!-- Cyber Boot / Welcome HUD Animation (plays when opening website window) -->
+  <div id="cyber-boot-overlay" class="cyber-boot-overlay" onclick="dismissBootOverlay()">
+    <div class="boot-container">
+      <div class="boot-shield-wrap">
+        <div class="boot-radar-ring"></div>
+        <div class="boot-shield">🛡️</div>
+      </div>
+      <div class="boot-brand">
+        <h2>AI-DRIVEN ADAPTIVE POST-QUANTUM LOGGING</h2>
+        <p class="boot-sub">ABESIT / AKTU &bull; POST-QUANTUM CRYPTOGRAPHIC SOC NODE</p>
+      </div>
+      <div class="boot-bar-box">
+        <div class="boot-bar-fill"></div>
+      </div>
+      <div class="boot-console" id="boot-console-text">
+        [INITIALIZING] NIST FIPS 203 ML-KEM &bull; FIPS 204 ML-DSA &bull; FIPS 205 SLH-DSA...
+      </div>
+      <div class="boot-dismiss-tip">⚡ Click anywhere to skip &rarr;</div>
+    </div>
+  </div>
+
   <!-- Top Navigation & Academic Banner -->
   <header class="navbar">
     <div class="nav-brand">
@@ -19,9 +46,13 @@
       <div class="brand-text">
         <div class="title-row">
           <h1>AI-Driven Adaptive Post-Quantum Cybersecurity Logging</h1>
-        
+          <span class="badge badge-quantum live-badge"><span class="live-dot"></span> NIST PQC FIPS 203/204/205</span>
+        </div>
+        <p class="institution-subtext">
+          ABES Institute of Technology, Ghaziabad &bull; Affiliated to Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow
+        </p>
+      </div>
     </div>
-    
   </header>
 
   <main class="container">
