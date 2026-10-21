@@ -7,9 +7,8 @@ adaptive PQC operations, DLT blockchain explorer, attack simulations, and benchm
 import os
 from typing import Dict, Any, Optional
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
 from config import RiskLevel, VALIDATOR_NODES, BASE_DIR
@@ -32,7 +31,6 @@ STATIC_DIR.mkdir(parents=True, exist_ok=True)
 TEMPLATES_DIR.mkdir(parents=True, exist_ok=True)
 
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
-templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
 # Singleton system pipeline
 pipeline = AdaptiveLoggingPipeline()
@@ -65,7 +63,10 @@ class CustomEventRequest(BaseModel):
 @app.get("/", response_class=HTMLResponse)
 async def index_page(request: Request):
     """Renders the Cyber SOC Dashboard UI."""
-    return templates.TemplateResponse("index.html", {"request": request})
+    html_path = TEMPLATES_DIR / "index.html"
+    if html_path.exists():
+        return FileResponse(str(html_path), media_type="text/html")
+    return HTMLResponse("<h1>AI-Driven Adaptive Post-Quantum Cybersecurity Logging</h1><p>Status: Active</p>")
 
 
 @app.get("/api/status")
