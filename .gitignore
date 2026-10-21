@@ -1,0 +1,37 @@
+# Python Bytecode and Caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual Environments (Teammates will create their own locally via setup script)
+venv/
+env/
+.venv/
+ENV/
+
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code User State (keep configs, ignore user state)
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Runtime Data Storage (ignore transient payloads, keep folder structure via .gitkeep)
+data_storage/offchain_payloads/*.json
+!data_storage/offchain_payloads/.gitkeep
+data_storage/ledger_chain/*.json
+!data_storage/ledger_chain/.gitkeep
+data_storage/models/*.joblib
+!data_storage/models/.gitkeep
+
+# Logs and Scratch Files
+*.log
+scratch/
+tmp/

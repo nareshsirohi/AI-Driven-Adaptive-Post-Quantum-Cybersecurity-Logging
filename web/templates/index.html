@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Driven Adaptive Post-Quantum Cyber Security Logging</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Top Navigation & Academic Banner -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <div class="brand-logo">
+        <span class="shield-icon">🛡️</span>
+      </div>
+      <div class="brand-text">
+        <div class="title-row">
+          <h1>AI-Driven Adaptive Post-Quantum Cybersecurity Logging</h1>
+          <span class="badge badge-accent">Project Id: 2023CSEAI025</span>
+          <span class="badge badge-quantum">NIST PQC FIPS 203/204/205</span>
+        </div>
+        <p class="institution-subtext">
+          ABES Institute of Technology, Ghaziabad &bull; Affiliated to Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow
+        </p>
+      </div>
+    </div>
+    <div class="nav-meta">
+      <div class="authors-dropdown">
+        <span class="guide-tag">Supervisor: <strong>Ms. Reshu Tyagi</strong></span>
+        <span class="team-tag">Team: Kanika &bull; Naresh &bull; Jiya &bull; Anmol</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Stat Summary Cards -->
+    <section class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-content">
+          <span class="stat-label">Events Processed</span>
+          <span class="stat-value" id="stat-total-events">0</span>
+          <span class="stat-sub" id="stat-risk-breakdown">L: 0 | M: 0 | H: 0 | C: 0</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⛓️</div>
+        <div class="stat-content">
+          <span class="stat-label">Ledger Height</span>
+          <span class="stat-value" id="stat-ledger-height">0</span>
+          <span class="stat-sub text-success">Consensus: 4 BFT Nodes Active</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🧠</div>
+        <div class="stat-content">
+          <span class="stat-label">AI Risk Classifier</span>
+          <span class="stat-value text-accent">Active</span>
+          <span class="stat-sub">Random Forest + Invariant Fail-Safe</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚛️</div>
+        <div class="stat-content">
+          <span class="stat-label">PQC Hardness</span>
+          <span class="stat-value text-quantum">Quantum-Proof</span>
+          <span class="stat-sub">ML-DSA &bull; SLH-DSA &bull; ML-KEM</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <div class="tab-navigation">
+      <button class="tab-btn active" data-tab="live-stream-panel">🔴 Live Stream & Policy Matrix</button>
+      <button class="tab-btn" data-tab="attack-lab-panel">🧪 Security & Tamper Lab (Sec VI-D)</button>
+      <button class="tab-btn" data-tab="blockchain-panel">⛓️ DLT Explorer & Merkle Proofs</button>
+      <button class="tab-btn" data-tab="benchmarks-panel">📈 Empirical Benchmarks (RQ1-RQ4)</button>
+      <button class="tab-btn" data-tab="about-panel">📄 Paper & Architecture Details</button>
+    </div>
+
+    <!-- TAB 1: Live Event Stream & Ingestion -->
+    <section id="live-stream-panel" class="tab-content active">
+      <div class="action-bar card">
+        <div class="action-controls">
+          <span class="action-title">⚡ Event Stream Ingestion Engine:</span>
+          <button class="btn btn-primary" onclick="generateEvent(null)">🎲 Sample Realistic Event</button>
+          <button class="btn btn-tier btn-low" onclick="generateEvent('LOW')">+ Force Low</button>
+          <button class="btn btn-tier btn-med" onclick="generateEvent('MEDIUM')">+ Force Medium</button>
+          <button class="btn btn-tier btn-high" onclick="generateEvent('HIGH')">+ Force High</button>
+          <button class="btn btn-tier btn-crit" onclick="generateEvent('CRITICAL')">+ Force Critical</button>
+          <button class="btn btn-outline" onclick="openCustomEventModal()">✍️ Custom Event Payload</button>
+          <button class="btn btn-secondary" onclick="flushLedgerPool()">⛏️ Flush Mempool</button>
+        </div>
+      </div>
+
+      <div class="stream-layout">
+        <!-- Live Stream Feed Table -->
+        <div class="card feed-card">
+          <div class="card-header">
+            <h3>🛡️ Ingested Event Stream & Dynamic Protection Record</h3>
+            <span class="badge badge-info" id="stream-count-badge">Displaying recent events</span>
+          </div>
+          <div class="table-container">
+            <table class="data-table" id="events-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Event Type / Source</th>
+                  <th>AI Risk Score</th>
+                  <th>Adaptive PQC Policy</th>
+                  <th>Ledger Tuple R</th>
+                  <th>Forensic Audit</th>
+                </tr>
+              </thead>
+              <tbody id="events-tbody">
+                <!-- Dynamically injected -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Adaptive Policy Reference Sidebar -->
+        <div class="card policy-card">
+          <div class="card-header">
+            <h3>📑 Adaptive Decision Policy (Table III)</h3>
+          </div>
+          <div class="policy-tier-box tier-low">
+            <div class="tier-title"><span class="badge badge-low">LOW RISK</span> 0.00 – 0.25</div>
+            <p><strong>Integrity:</strong> Canonical SHA-256 Digest</p>
+            <p><strong>Authenticity:</strong> HMAC-SHA256 Audit Tag</p>
+            <p><strong>DLT Commit:</strong> Batched Merkle Commitment</p>
+          </div>
+
+          <div class="policy-tier-box tier-med">
+            <div class="tier-title"><span class="badge badge-med">MEDIUM RISK</span> 0.25 – 0.65</div>
+            <p><strong>Integrity:</strong> Canonical Hash</p>
+            <p><strong>Authenticity:</strong> NIST FIPS 204 ML-DSA-44</p>
+            <p><strong>DLT Commit:</strong> Near-Real-Time Commitment</p>
+          </div>
+
+          <div class="policy-tier-box tier-high">
+            <div class="tier-title"><span class="badge badge-high">HIGH RISK</span> 0.65 – 0.85</div>
+            <p><strong>Integrity:</strong> Enhanced Provenance Hash</p>
+            <p><strong>Authenticity:</strong> ML-DSA-65 (Cat 3 Lattice)</p>
+            <p><strong>Confidentiality:</strong> ML-KEM-768 + AES-256-GCM</p>
+            <p><strong>DLT Commit:</strong> Immediate Block Inclusion</p>
+          </div>
+
+          <div class="policy-tier-box tier-crit">
+            <div class="tier-title"><span class="badge badge-crit">CRITICAL RISK</span> 0.85 – 1.00</div>
+            <p><strong>Integrity:</strong> Full Forensics Canonical Hash</p>
+            <p><strong>Authenticity:</strong> NIST FIPS 205 SLH-DSA (Stateless Hash)</p>
+            <p><strong>Confidentiality:</strong> ML-KEM-1024 Envelope</p>
+            <p><strong>DLT Commit:</strong> Expedited Priority Non-Batched</p>
+          </div>
+
+          <div class="callout callout-warning">
+            <strong>Section V-A Invariant:</strong> If AI confidence is below 0.65 or an anomaly occurs, the engine fails safe to <strong>HIGH RISK</strong>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: Security & Tamper Attack Simulator (Section VI-D) -->
+    <section id="attack-lab-panel" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h3>🧪 Adversarial Post-Compromise Security Tests (Section VI-D)</h3>
+          <span class="badge badge-accent">Tamper-Evidence Verification</span>
+        </div>
+        <p class="section-intro">
+          When an attacker compromises a database server, their primary objective is to alter or delete audit trails.
+          Test our distributed tamper-evident framework against 5 adversarial attack models.
+        </p>
+
+        <div class="attack-grid">
+          <!-- Attack 1 -->
+          <div class="attack-card">
+            <h4>1. Payload Tampering Attack</h4>
+            <p>Attacker modifies stored log action to conceal an exploit. Auditor detects <code>H(event') ≠ H(ledger)</code>.</p>
+            <button class="btn btn-danger" onclick="runAttackTest('payload_tampering')">Execute Tamper Test</button>
+          </div>
+
+          <!-- Attack 2 -->
+          <div class="attack-card">
+            <h4>2. Object Deletion Attack</h4>
+            <p>Attacker purges forensic record file from off-chain store. Auditor detects broken pointer <code>ptr</code>.</p>
+            <button class="btn btn-danger" onclick="runAttackTest('object_deletion')">Execute Deletion Test</button>
+          </div>
+
+          <!-- Attack 3 -->
+          <div class="attack-card">
+            <h4>3. Forged Signature Attack</h4>
+            <p>Attacker generates fraudulent signature bytes. PQC lattice verification engine rejects record.</p>
+            <button class="btn btn-danger" onclick="runAttackTest('forged_signature')">Execute Forgery Test</button>
+          </div>
+
+          <!-- Attack 4 -->
+          <div class="attack-card">
+            <h4>4. Policy Downgrade Attack</h4>
+            <p>Attacker re-classifies Critical alert as Low routine event. DLT immutability and signature check fails.</p>
+            <button class="btn btn-danger" onclick="runAttackTest('policy_downgrade')">Execute Downgrade Test</button>
+          </div>
+
+          <!-- Attack 5 -->
+          <div class="attack-card">
+            <h4>5. Quantum Adversary Audit</h4>
+            <p>Simulates Shor's quantum algorithm against Classical ECDSA vs NIST PQC (ML-DSA, SLH-DSA).</p>
+            <button class="btn btn-quantum" onclick="runAttackTest('quantum_readiness')">Run Quantum Audit</button>
+          </div>
+        </div>
+
+        <!-- Attack Result Console -->
+        <div class="console-box" id="attack-console">
+          <div class="console-header">
+            <span>Terminal: Attack Simulation & Forensic Verification Console</span>
+            <button class="btn-sm btn-outline" onclick="clearConsole()">Clear</button>
+          </div>
+          <pre id="console-output">// Click an attack test above to run the live verification pipeline...</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: Blockchain & Merkle Explorer -->
+    <section id="blockchain-panel" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h3>⛓️ Permissioned Distributed Ledger Explorer</h3>
+          <button class="btn btn-sm btn-secondary" onclick="loadBlockchainData()">🔄 Refresh Chain</button>
+        </div>
+        <div id="blockchain-blocks-list">
+          <!-- Dynamically populated blocks -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: Empirical Benchmarks & Cryptographic Evaluation -->
+    <section id="benchmarks-panel" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h3>📊 Cryptographic Micro-Benchmark: Classical vs Post-Quantum (Table IV)</h3>
+          <button class="btn btn-sm btn-primary" onclick="loadCryptoBenchmark()">⚡ Re-run Crypto Benchmark</button>
+        </div>
+        <div class="table-container">
+          <table class="data-table" id="crypto-bench-table">
+            <thead>
+              <tr>
+                <th>Cryptographic Scheme</th>
+                <th>Category / Standard</th>
+                <th>Public Key Size</th>
+                <th>Signature / CT Size</th>
+                <th>Signing / Encaps Latency</th>
+                <th>Verification Latency</th>
+                <th>Quantum Resistance</th>
+              </tr>
+            </thead>
+            <tbody id="crypto-bench-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card mt-20">
+        <div class="card-header">
+          <h3>🔬 End-to-End Baseline Comparison: B1 vs B2 vs B3 vs B4</h3>
+          <button class="btn btn-accent" onclick="runFullSystemBenchmark()">🚀 Run 50-Event Comparative Benchmark</button>
+        </div>
+        <div id="system-bench-results">
+          <p class="text-muted">Click the button above to execute comparative benchmark across B1 (Classical), B2 (BlockAudit), B3 (Static PQC), and B4 (Proposed Adaptive PQC).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: Paper & Architecture Overview -->
+    <section id="about-panel" class="tab-content">
+      <div class="card">
+        <h2>AI-Driven Adaptive Post Quantum Cyber Security Logging for Event Stream</h2>
+        <div class="meta-authors-box">
+          <p><strong>Department of Computer Science and Engineering (Artificial Intelligence)</strong></p>
+          <p><strong>ABES Institute of Technology (ABESIT), Ghaziabad</strong> &bull; Affiliated to Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow</p>
+          <p><strong>Supervisor:</strong> Ms. Reshu Tyagi (Assistant Professor)</p>
+          <p><strong>Student Researchers:</strong></p>
+          <ul>
+            <li>Kanika (2302901520092)</li>
+            <li>Naresh Sirohi (2302901520128)</li>
+            <li>Jiya Sharma (2302901520091)</li>
+            <li>Anmol Chaudhary (2302901520035)</li>
+          </ul>
+          <p><strong>Project ID:</strong> 2023CSEAI025 | Odd Semester, 2026–27</p>
+        </div>
+
+        <hr class="divider">
+
+        <h3>Architecture Highlights</h3>
+        <ul class="styled-list">
+          <li><strong>Event-Level Dynamic Security:</strong> Solves the computational bottleneck of static logging by mapping real-time AI risk assessment $\rho \in \{\text{Low, Medium, High, Critical}\}$ to NIST standardized PQC algorithms.</li>
+          <li><strong>Post-Quantum Resistance:</strong> Employs NIST FIPS 204 (ML-DSA-44/65), NIST FIPS 205 (SLH-DSA), and NIST FIPS 203 (ML-KEM) to prevent compromise from future Shor's algorithm quantum adversaries.</li>
+          <li><strong>Off-Chain / On-Chain DLT Scalability:</strong> Solves the blockchain bloat crisis of BlockAudit/BlockTrail by keeping high-volume payloads off-chain in store $S$ while maintaining compact cryptographic verification tuples $R = (\text{id}, t, \rho, \text{op}, H(\text{event}), \sigma, \text{ptr})$ on a permissioned Byzantine Fault Tolerant ledger.</li>
+          <li><strong>Fail-Safe Invariant:</strong> Fails safe to high-assurance PQC protection whenever classifier confidence drops below threshold or an anomaly is suspected.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal: Event Audit Inspector -->
+  <div class="modal" id="audit-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>🔍 Independent Forensic Audit & PQC Verification</h3>
+        <button class="modal-close" onclick="closeAuditModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="audit-modal-body">
+        <p>Loading audit proof...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Custom Event Payload -->
+  <div class="modal" id="custom-event-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>✍️ Ingest Custom Security Event</h3>
+        <button class="modal-close" onclick="closeCustomEventModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="custom-event-form" onsubmit="submitCustomEvent(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Event Type</label>
+              <input type="text" id="cust-event-type" value="AUTH_FAILED_SUSPECT" required>
+            </div>
+            <div class="form-group">
+              <label>Source IP</label>
+              <input type="text" id="cust-source-ip" value="194.26.29.112" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>User ID</label>
+              <input type="text" id="cust-user-id" value="admin" required>
+            </div>
+            <div class="form-group">
+              <label>Resource Path</label>
+              <input type="text" id="cust-resource" value="/api/v1/iam/credentials" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Failure Count</label>
+              <input type="number" id="cust-failures" value="7">
+            </div>
+            <div class="form-group">
+              <label>Admin Action?</label>
+              <select id="cust-is-admin">
+                <option value="1">Yes (Admin)</option>
+                <option value="0">No (Standard User)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Sensitive Target?</label>
+              <select id="cust-is-sensitive">
+                <option value="1">Yes (Sensitive)</option>
+                <option value="0">No (Routine)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Action Description</label>
+            <input type="text" id="cust-action" value="Repeated failed privilege elevation query injection" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">🚀 Ingest into Adaptive Pipeline</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

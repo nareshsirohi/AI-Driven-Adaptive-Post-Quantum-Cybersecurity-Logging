@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Web Server",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/python main.py server --port 8000",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run Attack Simulation",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/python main.py attack",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Comparative Benchmarks",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/python main.py benchmark",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Test Suite",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/python main.py test",
+      "problemMatcher": [],
+      "group": "test"
+    }
+  ]
+}

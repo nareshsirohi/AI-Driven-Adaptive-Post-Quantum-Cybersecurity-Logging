@@ -1,0 +1,50 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🚀 1. Run SOC Web Dashboard (Port 8000)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "args": ["server", "--port", "8000"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "🧪 2. Run Adversarial Security Tests (Section VI-D)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "args": ["attack"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "📊 3. Run Empirical Benchmarks (RQ1-RQ4)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "args": ["benchmark"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "✅ 4. Run Unit & Integration Test Suite",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "args": ["test"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "🧠 5. Train AI Threat Risk Model",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "args": ["train"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}
