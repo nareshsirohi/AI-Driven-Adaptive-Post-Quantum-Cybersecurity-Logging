@@ -102,5 +102,5 @@ VALIDATOR_NODES = [
 BFT_QUORUM_FRACTION = 0.67  # Byzantine fault tolerance requires > 2/3 agreement
 
 # Web UI configuration
-HOST = "0.0.0.0"
-PORT = 8000
+HOST = os.getenv("HOST", "0.0.0.0")
+PORT = int(os.getenv("PORT", 8000))
