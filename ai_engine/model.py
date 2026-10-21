@@ -81,10 +81,18 @@ class AIRiskClassifier:
             pred_class_idx = int(np.argmax(probs))
             confidence = float(probs[pred_class_idx])
 
-            # Calculate continuous risk score
-            # s = 0.05*P(L) + 0.35*P(M) + 0.75*P(H) + 0.98*P(C)
-            risk_score = float(0.05 * probs[0] + 0.35 * probs[1] + 0.75 * probs[2] + 0.98 * probs[3])
+            # Ensure continuous risk score s aligns strictly with Table III tier intervals:
+            # LOW: [0.00, 0.25), MEDIUM: [0.25, 0.65), HIGH: [0.65, 0.85), CRITICAL: [0.85, 1.00]
+            if pred_class_idx == 0:  # LOW
+                risk_score = 0.05 + 0.15 * (1.0 - confidence)
+            elif pred_class_idx == 1:  # MEDIUM
+                risk_score = 0.28 + 0.30 * confidence
+            elif pred_class_idx == 2:  # HIGH
+                risk_score = 0.68 + 0.14 * confidence
+            else:  # CRITICAL
+                risk_score = 0.88 + 0.10 * confidence
 
+            risk_score = min(max(risk_score, 0.01), 0.99)
             risk_level = TIER_MAP[pred_class_idx]
 
             # Section V-A Invariant: Check confidence floor
@@ -92,6 +100,7 @@ class AIRiskClassifier:
                 # If model is uncertain, fail safe to HIGH risk protection
                 if pred_class_idx < 2:  # Was LOW or MEDIUM
                     risk_level = FAILSAFE_RISK_FLOOR
+                    risk_score = max(risk_score, 0.75)
                     failsafe_triggered = True
 
         except Exception as e:
