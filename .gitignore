@@ -35,3 +35,4 @@ data_storage/models/*.joblib
 *.log
 scratch/
 tmp/
+bin/
