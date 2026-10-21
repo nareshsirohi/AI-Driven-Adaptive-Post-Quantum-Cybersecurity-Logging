@@ -23,7 +23,6 @@ function initCyberBootSequence() {
   if (!overlay || !consoleEl) return;
 
   const steps = [
-    { delay: 250, text: "[AUTHENTICATING] ABESIT / AKTU Consortium Trust Anchors..." },
     { delay: 550, text: "[HARDENING] NIST FIPS 203 ML-KEM & FIPS 204 ML-DSA Post-Quantum Engines Ready" },
     { delay: 850, text: "[CONSENSUS] Merkle Block Tree & PBFT Validator Consortium Synchronized" },
     { delay: 1100, text: "[ONLINE] Adaptive PQC Cyber Stream Active. Entering SOC Dashboard..." }
