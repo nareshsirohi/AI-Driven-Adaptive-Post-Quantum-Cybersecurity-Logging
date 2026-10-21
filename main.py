@@ -13,14 +13,15 @@ import uvicorn
 from config import HOST, PORT
 
 
-def run_server(host: str = HOST, port: int = PORT):
-    """Starts the FastAPI Web Application and Cyber SOC Dashboard."""
+def run_server(host: str = HOST, port: int = PORT, reload: bool = True):
+    """Starts the FastAPI Web Application and Cyber SOC Dashboard with live auto-reload."""
     print("================================================================================")
     print(" 🛡️  AI-Driven Adaptive Post-Quantum Cybersecurity Logging System")
     print(f" 📍  ABESIT / AKTU Capstone Project (ID: 2023CSEAI025)")
     print(f" 🌐  Starting SOC Dashboard on http://{host}:{port}")
+    print(f" ⚡  Live Auto-Reload: {'ENABLED (Edits in VS Code will update instantly)' if reload else 'DISABLED'}")
     print("================================================================================")
-    uvicorn.run("web.app:app", host=host, port=port, reload=False)
+    uvicorn.run("web.app:app", host=host, port=port, reload=reload)
 
 
 def run_tests():
